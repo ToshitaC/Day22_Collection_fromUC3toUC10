@@ -12,7 +12,7 @@ public class AddressBookMain {
     }
 
     public void displayAddressBook() {
-        for (Map.Entry<String, Contacts> contact : addressBook.entrySet()) {
+        for(Map.Entry<String, Contacts> contact : addressBook.entrySet()) {
             System.out.println(contact.getValue());
         }
     }
@@ -22,7 +22,7 @@ public class AddressBookMain {
         boolean flag = true;
         for (Map.Entry<String, Contacts> contact : addressBook.entrySet()) {
             if (fullName.toUpperCase().equals((contact.getKey()).toUpperCase())) {
-                System.out.println("Which you want to edit: ");
+                System.out.println("What you want to edit: ");
                 System.out.println("1. Address");
                 System.out.println("2. City");
                 System.out.println("3. State");
@@ -50,15 +50,29 @@ public class AddressBookMain {
                         contact.getValue().setEmail(sc.next());
                         break;
                     default:
-                        System.out.println("Invaild choice");
+                        System.out.println("Invalid choice");
                 }
                 flag = false;
                 break;
             }
         }
         if (flag)
-            System.out.println("Contact doesn't Exist");
+            System.out.println("Does not exist");
         sc.close();
+    }
+
+    public void deleteContact(String name) {
+        boolean flag = true;
+        for (Map.Entry<String, Contacts> contact : addressBook.entrySet()) {
+            if (name.toUpperCase().equals((contact.getKey()).toUpperCase())) {
+                addressBook.remove(contact.getKey());
+                flag = false;
+            }
+            if (flag)
+                System.out.println("Contact doesn't Exist");
+            else
+                System.out.println("Contact Deleted");
+        }
     }
 
     public Contacts createContact() {
@@ -92,32 +106,35 @@ public class AddressBookMain {
 
         return contact;
     }
-
+    // maine method
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         AddressBookMain addressBookObject = new AddressBookMain();
 
-        Contacts givenContact = new Contacts("Toshita", "C.", "Abc Residency", "Dombivli", "MH", 421202, "9118282002", "xyz.abc@gmail.com");
+        Contacts givenContact = new Contacts("Toshita" , "C" , "Abc Residency" , "Dombivali" , "MH" , 421202 , "9118282002" , "xyz.abc@gmail.com");
         addressBookObject.addContactToAddressBook(givenContact);
 
-        System.out.println("1. Add Contact \n2. Edit Contact\n ");
+        System.out.println("1. Add Contact \n2. Edit Contact\n3. Delete Contact ");
         System.out.println("Enter your choice: ");
         int select = sc.nextInt();
-        switch (select) {
-            case 1:
-                Contacts contact = addressBookObject.createContact();
+        switch(select) {
+            case 1: Contacts contact = addressBookObject.createContact();
                 addressBookObject.addContactToAddressBook(contact);
                 break;
-            case 2:
-                System.out.println("Enter Fullname: ");
+            case 2: System.out.println("Enter Fullname: ");
+                sc.nextLine();
                 String fullName = sc.nextLine();
                 addressBookObject.editContact(fullName);
                 break;
-            default:
-                System.out.println("Invalid choice");
+            case 3: System.out.println("Enter the Full Name : ");
+                sc.nextLine();
+                String name = sc.nextLine();
+                addressBookObject.deleteContact(name);
+                break;
+            default: System.out.println("Invalid choice");
         }
+        System.out.println();
         addressBookObject.displayAddressBook();
         sc.close();
     }
 }
-

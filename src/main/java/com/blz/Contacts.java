@@ -10,7 +10,7 @@ public class Contacts {
     public String phoneNumber;
     public String email;
 
-    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String email) {
+    public Contacts( String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -20,7 +20,7 @@ public class Contacts {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
+    //getter-setter
     public String getFirstName() {
         return firstName;
     }
@@ -100,6 +100,7 @@ public class Contacts {
         this.email = email;
     }
 
+
     public String getFullName() {
         return (firstName + " " + lastName);
     }
@@ -109,7 +110,7 @@ public class Contacts {
         return ("Name: " + firstName + " " + lastName + "\n"
                 + "Address: " + address + "\n"
                 + "City: " + city + "\n"
-                + "State: " + state + "\n"
+                +	"State: " + state + "\n"
                 + "Zip: " + zip + "\n"
                 + "Phone Number: " + phoneNumber + "\n"
                 + "Email: " + email);
