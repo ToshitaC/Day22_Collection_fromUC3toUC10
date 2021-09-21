@@ -10,7 +10,7 @@ public class Contacts {
     private long phoneNumber;
     private String email;
 
-    public Contacts( String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber, String email) {
+    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -101,13 +101,22 @@ public class Contacts {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        boolean result = false;
+        if (object == this) {
+            return true;
+        }
 
-    public String getFullName() {
-        return (firstName + " " + lastName);
+        Contacts contact = (Contacts) object;
+        if (contact.firstName.equals(this.firstName) && contact.lastName.equals(this.lastName)) {
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public String toString() {
-        return this.getFirstName() + " " + this.getLastName() + " " + this.getAddress() + " " + this.getPhoneNumber() + " " + this.getCity();
+        return this.getFirstName() + " " + this.getLastName() + " " + this.getAddress() + " " + this.getPhoneNumber() + " " + this.getEmail();
     }
 }

@@ -4,25 +4,36 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
-    static int option = 0;
-    public static void main(String[] args) {
-        AddressBook[] addressBook = new AddressBook[2];
-        addressBook[0] = new AddressBook("Address Book 2019");
-        addressBook[1] = new AddressBook("Address Book 2020");
+    static HashMap<String, AddressBook> addressBookMap = new HashMap<>();
+
+    public static void createAddressBook() {
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
-        HashMap<String,AddressBook> addressBookMap = new HashMap<>();
-        addressBookMap.put("Address Book 2019", addressBook[0]);
-        addressBookMap.put("Address Book 2020", addressBook[1]);
+        System.out.println("Do you want to add new address book? (Y / N)");
+        if (sc.nextLine().equals("Y")) {
+            do {
+                System.out.println("Enter the Address Book");
+                String bookName = sc.nextLine();
+                addressBookMap.put(bookName, new AddressBook("bookName"));
+                System.out.println("Continue: (Y/N)");
+            } while (sc.nextLine().equals("Y"));
+        }
+    }
+
+    public static void main(String[] args) {
+        createAddressBook();
+        @SuppressWarnings("resource")
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name  of address book you want to access: ");
+        String addressBookName = sc.nextLine();
         do {
-            sc.nextLine();
             System.out.println("1. Create and Add Contact \n2. Edit Contact\n3. Delete Contact");
             System.out.println("Enter your choice: ");
             int select = sc.nextInt();
 
-            switch(select) {
-                case 1: System.out.println("Enter the details of Contact:\nEnter 1.)Address Book 2019 \t 2.)Address Book 2020");
-                    option = sc.nextInt();
-                    sc.nextLine();
+            switch (select) {
+                case 1:
+                    System.out.println("Enter the details of Contact:\nEnter 1.)Address Book 2019 \t 2.)Address Book 2020");
                     System.out.println("Enter First Name:");
                     String firstName = sc.next();
                     System.out.println("Enter Last Name:");
@@ -40,32 +51,22 @@ public class AddressBookMain {
                     System.out.println("Enter email address:");
                     String email = sc.nextLine();
                     Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
-                    if (option == 1)
-                        addressBook[0].addContact(contact);
-                    else
-                        addressBook[1].addContact(contact);
+                    addressBookMap.get(addressBookName).addContact(contact);
                     break;
-                case 2: System.out.println("Enter Fullname: ");
+                case 2:
+                    System.out.println("Enter Full Name: ");
                     String fullName = sc.nextLine();
-                    if (option == 1)
-                        addressBook[0].editContact(fullName);
-                    else
-                        addressBook[1].editContact(fullName);
+                    addressBookMap.get(addressBookName).editContact(fullName);
                     break;
-                case 3: System.out.println("Enter the Full Name : ");
+                case 3:
+                    System.out.println("Enter the Full Name : ");
                     String name = sc.nextLine();
-                    if(option == 1)
-                        addressBook[0].deleteContact(name);
-                    else
-                        addressBook[1].deleteContact(name);
+                    addressBookMap.get(addressBookName).deleteContact(name);
                     break;
-                default:System.out.println("Invalid choice");
+                default:
+                    System.out.println("Invalid choice");
             }
             System.out.println("Do you want Continue or Add new Contact(Y/N)");
-        }while(sc.next().charAt(0) == 'Y');
-        System.out.println("All Contacts in Address Book 2019: ");
-        System.out.println(addressBook[0].getAddressBook());
-        System.out.println("All Contacts in Address Book 2020: ");
-        System.out.println(addressBook[1].getAddressBook());
+        } while (sc.nextLine().equals("Y"));
     }
 }
