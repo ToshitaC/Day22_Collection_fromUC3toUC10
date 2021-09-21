@@ -28,7 +28,7 @@ public class AddressBook {
     public void addNewContact () {
         //Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name: ");
-        String firstName = sc.nextLine();
+        String firstName = sc.next();
         for(int i=1; i>0; i++) {
             if(duplicateEntryValidation(firstName))
                 continue;
@@ -36,7 +36,7 @@ public class AddressBook {
                 break;
         }
         System.out.println("Enter Last Name: ");
-        String lastName = sc.nextLine();
+        String lastName = sc.next();
         System.out.println("Enter Phone Number: ");
         long phoneNumber = sc.nextLong();
         System.out.println("Enter Address: ");
@@ -105,6 +105,7 @@ public class AddressBook {
                     break;
                 case 4:	System.exit(0);
                     break;
+                default: System.out.println("Invalid");
             }
         }
     }

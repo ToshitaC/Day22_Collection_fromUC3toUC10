@@ -3,7 +3,6 @@ package com.blz;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -44,11 +43,26 @@ public class AddressBookMain {
         addressMap.forEach((key, value) -> System.out.println(key + "\n"));
     }
 
+    public static void numberByCity() {
+        Set<String> listOfCity = cityToContactEntryMap.keySet();
+        for(String cityName : listOfCity) {
+            Contacts contactNumber = cityToContactEntryMap.get(cityName);
+            System.out.println("Number of Contacts from city " + cityName + " " + ((Map<String, AddressBookMain>) contactNumber).size());
+        }
+    }
+
+    public static void numberByState() {
+        Set<String> listOfState = stateToContactEntryMap.keySet();
+        for(String stateName : listOfState) {
+            Contacts contactNumber = stateToContactEntryMap.get(stateName);
+            System.out.println("Number of Contacts from state " + stateName + " " + ((Map<String, AddressBookMain>)contactNumber).size());
+        }
+    }
+
     public static void personSearch(String search) {
         int numOfPerson = 0;
-        Iterator<Entry<String, AddressBook>> contactArray = addressMap.entrySet().iterator();
+        Iterator contactArray = addressMap.entrySet().iterator();
         while(contactArray.hasNext()) {
-            @SuppressWarnings("rawtypes")
             Map.Entry entry=(Map.Entry) contactArray.next();
             AddressBook address = (AddressBook)entry.getValue();
             List<Contacts> list = address.getcontactArray();
@@ -67,7 +81,8 @@ public class AddressBookMain {
     public static void main(String args[]) {
         AddressBookMain addressBook = new AddressBookMain();
         for(int i=0; i >= 0; i++) {
-            System.out.println("\n1.Adding a Address Book \n2.Searching for a Person \n3. View Contacts grouped by city \n4. View Contacts grouped by state");
+            System.out.println("\n1.Adding a Address Book:: \n2.Searching for a Person \n3. View Contacts grouped by city \n4. View Contacts grouped by state \n");
+            System.out.print("5. Number of contacts according to city \n6. Number of contacts according to state");
             System.out.println("\n Enter Your Choice:");
             int select = sc.nextInt();
             switch(select) {
@@ -97,6 +112,11 @@ public class AddressBookMain {
                     break;
                 case 4:	displayContactsByStateGrouping();
                     break;
+                case 5:	numberByCity();
+                    break;
+                case 6:	numberByState();
+                    break;
+                default: System.out.println("Invalid");
             }
         }
     }
