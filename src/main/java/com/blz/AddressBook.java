@@ -4,13 +4,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
+    public Contacts contact;
+    public String name;
+
+    public AddressBook (String name) {
+        this.name = name;
+    }
+
+    public Contacts getContact() {
+        return contact;
+    }
+
+    public void setContact(Contacts contact) {
+        this.contact = contact;
+    }
+
     public ArrayList<Contacts> addressBook = new ArrayList<Contacts>();
+
 
     public ArrayList<Contacts> getAddressBook() {
         return addressBook;
     }
 
-    public void setAddressBook(ArrayList<Contacts> addressBook) {
+    public void setAddressBook(ArrayList<Contacts>addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -34,52 +50,45 @@ public class AddressBook {
                 int choice = sc.nextInt();
 
                 switch (choice) {
-                    case 1:
-                        System.out.println("Enter new address");
+                    case 1 : System.out.println("Enter new address");
                         String address = sc.nextLine();
                         contact.setAddress(address);
                         break;
-                    case 2:
-                        System.out.println("Enter new city");
+                    case 2 : System.out.println("Enter new city");
                         String city = sc.nextLine();
                         contact.setCity(city);
                         break;
-                    case 3:
-                        System.out.println("Enter new state");
+                    case 3 : System.out.println("Enter new state");
                         String state = sc.nextLine();
                         contact.setAddress(state);
                         break;
-                    case 4:
-                        System.out.println("Enter new ZIP code");
+                    case 4 : System.out.println("Enter new ZIP code");
                         int zip = sc.nextInt();
                         contact.setZip(zip);
                         sc.nextLine();
                         break;
-                    case 5:
-                        System.out.println("Enter new Phone Number");
+                    case 5 : System.out.println("Enter new Phone Number");
                         long phone = sc.nextLong();
                         sc.nextLine();
                         contact.setPhoneNumber(phone);
                         break;
-                    case 6:
-                        System.out.println("Enter new Email id");
+                    case 6 : System.out.println("Enter new Email id");
                         String email = sc.nextLine();
                         contact.setEmail(email);
                         break;
                 }
-            } else
+            }
+            else
                 System.out.println("Invalid Contact");
 
         }
     }
-
-    public void deleteContact(String name) {
+    public void deleteContact (String name) {
         String str1 = "";
         for (Contacts contact : addressBook) {
             str1 = contact.getFirstName() + contact.getLastName();
-            if (name.equals(str1))
+            if(name.equals(str1))
                 addressBook.remove(contact);
         }
     }
 }
-
