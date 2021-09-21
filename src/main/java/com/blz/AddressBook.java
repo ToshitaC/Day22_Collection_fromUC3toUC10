@@ -11,6 +11,7 @@ public class AddressBook {
     }
 
     public Contacts contact;
+    public ArrayList<Contacts> addressBook = new ArrayList<Contacts>();
 
     public Contacts getContact() {
         return contact;
@@ -19,8 +20,6 @@ public class AddressBook {
     public void setContact(Contacts contact) {
         this.contact = contact;
     }
-
-    public ArrayList<Contacts> addressBook = new ArrayList<Contacts>();
 
     public ArrayList<Contacts> getAddressBook() {
         return addressBook;
